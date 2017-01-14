@@ -40,5 +40,6 @@ namespace PictureGalleryModel
         /// <param name =" album "> Album </ param >
         /// <param name =" userId ">Id of the user that is trying to update the data</ param>
         void Update(Album album, User user);
+        List<Album> GetAll(User user);
     }
 }

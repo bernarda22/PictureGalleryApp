@@ -38,7 +38,7 @@ namespace PictureGalleryModel
 
         public List<Album> GetAll(User user)
         {
-            return _context.Albums.Where(s => s.CreatedByUser == user).OrderByDescending(s => s.DateCreated).ToList();
+            return _context.Albums.Where(s => s.CreatedByUser.Email == user.Email).OrderByDescending(s => s.DateCreated).ToList();
         }
 
         public bool Remove(Guid albumId, User user)

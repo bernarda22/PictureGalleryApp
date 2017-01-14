@@ -10,6 +10,7 @@ using PictureGalleryApp.Models;
 using PictureGalleryApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.Twitter;
+using PictureGalleryModel;
 
 namespace PictureGalleryApp
 {
@@ -42,6 +43,16 @@ namespace PictureGalleryApp
         {
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
+
+            services.AddTransient<IAlbumRepository, AlbumSqlRepository>();
+            services.AddTransient<IPictureRepository, PictureSqlRepository>();
+            services.AddTransient<ICommentRepository, CommentSqlRepository>();
+            services.AddTransient<IUserRepository, UserSqlRepository>();
+
+            services.AddScoped<GalleryDbContext>((s) =>
+            {
+                return new GalleryDbContext(Configuration["ConnectionStrings:DefaultConnection"]);
+            });
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));

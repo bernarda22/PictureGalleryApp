@@ -24,11 +24,11 @@ namespace PictureGalleryModel
             modelBuilder.Entity<Album>().HasKey(c => c.Id);
             modelBuilder.Entity<Album>().Property(c => c.Title).IsRequired();
             modelBuilder.Entity<Album>().Property(c => c.DateCreated).IsRequired();
-            modelBuilder.Entity<Album>().HasRequired(a => a.CreatedByUser).WithMany(a => a.AlbumsCreated);
+            modelBuilder.Entity<Album>().HasRequired(a => a.CreatedByUser).WithMany(a => a.AlbumsCreated).WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>().HasKey(a => a.Email);
-            modelBuilder.Entity<User>().Property(c => c.FirstName).IsRequired();
-            modelBuilder.Entity<User>().Property(c => c.LastName).IsRequired();
+            modelBuilder.Entity<User>().Property(c => c.FirstName).IsOptional();
+            modelBuilder.Entity<User>().Property(c => c.LastName).IsOptional();
             modelBuilder.Entity<User>().Property(c => c.Admin).IsRequired();
             modelBuilder.Entity<User>().HasMany(a => a.LikedPictures).WithMany(a => a.LikedByUsers);
             modelBuilder.Entity<User>().HasMany(a => a.LikedPictures).WithMany();

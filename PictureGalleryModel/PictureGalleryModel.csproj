@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\Album.cs" />
+    <Compile Include="Album.cs" />
     <Compile Include="AlbumAccessDeniedException.cs" />
     <Compile Include="AlbumSqlRepository.cs" />
     <Compile Include="Comment.cs" />

@@ -27,12 +27,7 @@ namespace PictureGalleryModel
 
         public User Get(string email)
         {
-            var user = _context.Users.Where(s => s.Email == email).FirstOrDefault();
-            if (user != null)
-            {
-                throw new UserAccessDeniedException("user doesn't exist");
-            }
-            return user;
+           return _context.Users.Where(s => s.Email == email).FirstOrDefault();
         }
 
     }

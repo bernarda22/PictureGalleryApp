@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using PictureGalleryApp.Models;
 using PictureGalleryApp.Models.AccountViewModels;
 using PictureGalleryApp.Services;
+using PictureGalleryModel;
 
 namespace PictureGalleryApp.Controllers
 {
@@ -18,6 +19,7 @@ namespace PictureGalleryApp.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserRepository _userRepository;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
@@ -28,9 +30,11 @@ namespace PictureGalleryApp.Controllers
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory,
+            IUserRepository userRepository)
         {
             _userManager = userManager;
+            _userRepository = userRepository;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
@@ -214,6 +218,7 @@ namespace PictureGalleryApp.Controllers
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
+                        _userRepository.Add(new User(user.UserName,null,null));
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
                         return RedirectToLocal(returnUrl);
