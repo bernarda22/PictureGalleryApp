@@ -9,6 +9,7 @@ using PictureGalleryApp.Data;
 using PictureGalleryApp.Models;
 using PictureGalleryApp.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.Twitter;
 
 namespace PictureGalleryApp
 {
@@ -84,6 +85,12 @@ namespace PictureGalleryApp
             app.UseStaticFiles();
 
             app.UseIdentity();
+
+            app.UseTwitterAuthentication(new TwitterOptions()
+            {
+                ConsumerKey = Configuration["Authentication:Twitter:ConsumerKey"],
+                ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"]
+            });
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
