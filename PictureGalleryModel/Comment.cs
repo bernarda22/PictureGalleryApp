@@ -22,5 +22,10 @@ namespace PictureGalleryModel
             CreatedBy = createdby;
             DateCreated = DateTime.Now;
         }
+
+        public Comment()
+        {
+
+        }
     }
 }

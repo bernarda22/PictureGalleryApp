@@ -49,21 +49,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Album.cs" />
+    <Compile Include="Properties\Album.cs" />
     <Compile Include="AlbumAccessDeniedException.cs" />
     <Compile Include="AlbumSqlRepository.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="CommentSqlRepository.cs" />
     <Compile Include="DuplicateAlbumException.cs" />
+    <Compile Include="DuplicateCommentException.cs" />
+    <Compile Include="DuplicatePictureException.cs" />
+    <Compile Include="DuplicateUserException.cs" />
     <Compile Include="GalleryDbContext.cs" />
     <Compile Include="IAlbumRepository.cs" />
     <Compile Include="ICommentRepository.cs" />
     <Compile Include="IPictureRepository.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="Picture.cs" />
+    <Compile Include="PictureAccessDeniedException.cs" />
     <Compile Include="PictureSqlRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserAccessDeniedException.cs" />
     <Compile Include="UserSqlRepository.cs" />
   </ItemGroup>
   <ItemGroup>

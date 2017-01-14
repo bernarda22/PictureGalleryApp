@@ -24,5 +24,10 @@ namespace PictureGalleryModel
             LastName = lastName;
             Admin = false;
         } 
+
+        public User()
+        {
+
+        }
     }
 }
