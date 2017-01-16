@@ -1,0 +1,31 @@
+﻿@model AlbumViewModel
+
+<html>
+<head>
+</head>
+
+<body>
+    <h1>Create album</h1>
+    <div>
+        <br />
+        <form asp-action="Create"
+              asp-controller="Album"
+              method="post"
+              enctype="multipart/form-data">
+
+            <label asp-for="Title"></label>
+            @Html.DisplayFor(m => m.Title)
+            <input  asp-for="Title">
+            <span asp-validation-for="Title"></span>
+            
+            <br/>
+            <label asp-for="@Model.Thumbnail"></label>
+            @Html.DisplayFor(m => m.Thumbnail)
+            <input asp-for="@Model.Thumbnail" />
+           
+            <input type="submit" value="Create album" />
+        </form>
+
+    </div>
+</body>
+</html>
