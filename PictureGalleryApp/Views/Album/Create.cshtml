@@ -1,31 +1,46 @@
 ﻿@model AlbumViewModel
 
-<html>
-<head>
-</head>
+@{
+    ViewData["Title"] = "Create album";
+}
 
-<body>
-    <h1>Create album</h1>
-    <div>
-        <br />
-        <form asp-action="Create"
-              asp-controller="Album"
-              method="post"
-              enctype="multipart/form-data">
+<h2>@ViewData["Title"].</h2>
 
-            <label asp-for="Title"></label>
-            @Html.DisplayFor(m => m.Title)
-            <input  asp-for="Title">
-            <span asp-validation-for="Title"></span>
-            
-            <br/>
-            <label asp-for="@Model.Thumbnail"></label>
-            @Html.DisplayFor(m => m.Thumbnail)
-            <input asp-for="@Model.Thumbnail" />
-           
-            <input type="submit" value="Create album" />
-        </form>
+<div class="row">
+    <div class="col-md-8">
+        <section>
+            <form asp-controller="Album" asp-action="Create" method="post" class="form-horizontal" enctype="multipart/form-data">
+                <h4>Create album.</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                
+                <div class="form-group">
+                    <label asp-for="Title" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
 
+                <div class="form-group">
+                    <label asp-for="@Model.GalleryImages" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="@Model.GalleryImages" class="form-control" id="imgInp" />
+                        @Html.DisplayFor(m => m.GalleryImages)  
+                    </div>
+                </div>
+
+                <hr/>
+                <div class="form-group">
+                    <div class="col-md-10" id="image-section"></div> 
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-default">Create album</button>
+                    </div>
+                </div>
+            </form>
+        </section>
     </div>
-</body>
-</html>
+</div>       

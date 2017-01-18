@@ -1,13 +1,29 @@
 ﻿@model List<PictureGalleryModel.Album>
-<html>
-<head>
 
-</head>
-<body>
-    <h1>Active todo</h1>
-    <div>
-        <br />
-        <a  asp-controller="Album"  asp-action="Create"> Create album</a>
+@{
+    ViewData["Title"] = "Albums";
+}
+<h2>@ViewData["Title"].</h2>
+
+<div>
+    <br />
+    <a asp-controller="Album" asp-action="Create"> Create album</a>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <section>
+            <table class="table table-hover">
+                <tbody>
+                    @foreach(var album in Model)
+                    {
+                        <tr>
+                            <td>@album.Title</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </section>
     </div>
-</body>
-</html>
+</div>

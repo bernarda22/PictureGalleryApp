@@ -8,26 +8,21 @@ namespace PictureGalleryModel
 {
     public class User
     {
+        public string UserName { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool Admin { get; set; }
-        public List<User> TrackingUsers { get; set; }
-        public List<Picture> LikedPictures { get; set; }
-        public List<Album> AlbumsCreated { get; set; }
-        public List<Comment> Comments { get; set; }
-
-        public User(string email, string firstName, string lastName)
-        {
-            Email = email;
-            FirstName = firstName;
-            LastName = lastName;
-            Admin = false;
-        } 
+        public virtual List<Picture> LikedPictures { get; set; }
+        public virtual List<Album> AlbumsCreated { get; set; }
+        public virtual List<Comment> Comments { get; set; }
 
         public User()
         {
-
+            LikedPictures = new List<Picture>();
+            AlbumsCreated = new List<Album>();
+            Comments = new List<Comment>();
+            Admin = false;
         }
     }
 }

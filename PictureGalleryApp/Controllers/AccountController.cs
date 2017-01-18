@@ -110,6 +110,10 @@ namespace PictureGalleryApp.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var userLocal = new User();
+                userLocal.UserName = user.UserName;
+                userLocal.Email = user.Email;
+                _userRepository.Add(userLocal);
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -218,7 +222,11 @@ namespace PictureGalleryApp.Controllers
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
-                        _userRepository.Add(new User(user.UserName,null,null));
+                        var localUser = new User();
+                        user.UserName = user.UserName;
+                        user.Email = user.Email;
+                        _userRepository.Add(localUser);
+
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
                         return RedirectToLocal(returnUrl);

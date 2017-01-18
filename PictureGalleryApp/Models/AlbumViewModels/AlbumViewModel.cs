@@ -13,7 +13,7 @@ namespace PictureGalleryApp.Models.AlbumViewModels
         [Display(Name = "Album title")]
         public string Title { get; set; }
 
-        [Display(Name = "Thumbnail image")]
-        public IFormFile Thumbnail { get; set; }
+        [Display(Name = "Images")]
+        public List<IFormFile> GalleryImages { get; set; }
     }
 }
