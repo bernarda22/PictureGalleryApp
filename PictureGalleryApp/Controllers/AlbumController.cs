@@ -57,7 +57,7 @@ namespace PictureGalleryApp.Controllers
 
                 foreach (var image in model.GalleryImages)
                 {
-                    string filename = _hostingEnv.WebRootPath + $@"\{Guid.NewGuid()}";
+                    string filename = _hostingEnv.WebRootPath + $@"\gallery-images\{Guid.NewGuid()}";
                     using (FileStream fs = System.IO.File.Create(filename))
                     {
                         image.CopyTo(fs);
