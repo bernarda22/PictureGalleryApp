@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PictureGalleryApp.Models.AlbumViewModels
 {
@@ -13,7 +11,7 @@ namespace PictureGalleryApp.Models.AlbumViewModels
         [Display(Name = "Album title")]
         public string Title { get; set; }
 
-        [Display(Name = "Images")]
+        [Display(Name = "Upload images")]
         public List<IFormFile> GalleryImages { get; set; }
     }
 }

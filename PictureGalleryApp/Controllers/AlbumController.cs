@@ -42,33 +42,39 @@ namespace PictureGalleryApp.Controllers
             return View();
         }
 
+        //Album/Create
         [HttpPost]
         public async Task<IActionResult> Create(AlbumViewModel model)
         {
-            User user = await getCurrentUser();
-            var album = new Album();
-            album.Title = model.Title;
-            album.CreatedByUser = user;
-            album.Id = Guid.NewGuid();
-            album.DateCreated = DateTime.Now;
-
-            foreach(var image in model.GalleryImages)
+            if (ModelState.IsValid)
             {
-                string filename = _hostingEnv.WebRootPath + $@"\{Guid.NewGuid()}";
-                using (FileStream fs = System.IO.File.Create(filename))
+                User user = await getCurrentUser();
+                var album = new Album();
+                album.Title = model.Title;
+                album.CreatedByUser = user;
+                album.Id = Guid.NewGuid();
+                album.DateCreated = DateTime.Now;
+
+                foreach (var image in model.GalleryImages)
                 {
-                    image.CopyTo(fs);
-                    fs.Flush();
+                    string filename = _hostingEnv.WebRootPath + $@"\{Guid.NewGuid()}";
+                    using (FileStream fs = System.IO.File.Create(filename))
+                    {
+                        image.CopyTo(fs);
+                        fs.Flush();
+                    }
+                    Picture picture = new Picture();
+                    picture.Album = album;
+                    picture.PathToData = filename;
+                    _pictureRepository.Add(picture);
+                    album.Pictures.Add(picture);
                 }
-                Picture picture = new Picture();
-                picture.Album = album;
-                picture.PathToData = filename;
-                _pictureRepository.Add(picture);
-                album.Pictures.Add(picture);
+                user.AlbumsCreated.Add(album);
+
+                return RedirectToAction(nameof(AlbumController.Index), "Album");
             }
-            user.AlbumsCreated.Add(album);
-           
-            return RedirectToAction(nameof(AlbumController.Index), "Album");
+
+            return View(model);
         }
 
         private async Task<User> getCurrentUser()
