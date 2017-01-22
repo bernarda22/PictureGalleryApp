@@ -15,7 +15,7 @@ namespace PictureGalleryModel
         /// <param name =" albumId "> Album Id </ param >
         /// <param name =" userId ">Id of the user that is trying to fetch the data</ param >
         /// <returns > Album if found , null otherwise </ returns >
-        Album Get(Guid albumId, User user);
+        Album Get(Guid albumId);
         /// <summary >
         /// Adds new Album object in database .
         /// If object with the same id already exists ,
@@ -30,7 +30,7 @@ namespace PictureGalleryModel
         /// <param name =" albumId "> Album Id </ param >
         /// <param name =" userId ">Id of the user that is trying to remove the data</ param >
         /// <returns > True if success , false otherwise </ returns >
-        bool Remove(Guid albumId, User user);
+        bool Remove(Guid albumId);
         /// <summary >
         /// Updates given Album in database .
         /// If Album does not exist , method will add one . Throw

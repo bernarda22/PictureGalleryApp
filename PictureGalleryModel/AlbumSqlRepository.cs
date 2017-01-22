@@ -18,7 +18,7 @@ namespace PictureGalleryModel
 
         public void Add(Album album)
         {
-            if (Get(album.Id, album.CreatedByUser) != null)
+            if (Get(album.Id) != null)
             {
                 throw new DuplicateAlbumException(String.Format("duplicate id: {0}", album.Id));
             }
@@ -26,14 +26,9 @@ namespace PictureGalleryModel
             _context.SaveChanges();
         }
 
-        public Album Get(Guid albumId, User user)
+        public Album Get(Guid albumId)
         {
-            var album = _context.Albums.Where(s => s.Id == albumId).FirstOrDefault();
-            if (album != null && album.CreatedByUser != user)
-            {
-                throw new AlbumAccessDeniedException("album is not available for this user");
-            }
-            return album;
+            return _context.Albums.Where(s => s.Id == albumId).FirstOrDefault();
         }
 
         public List<Album> GetAll(User user)
@@ -41,9 +36,9 @@ namespace PictureGalleryModel
             return _context.Albums.Where(s => s.CreatedByUser.Email == user.Email).OrderByDescending(s => s.DateCreated).ToList();
         }
 
-        public bool Remove(Guid albumId, User user)
+        public bool Remove(Guid albumId)
         {
-            var album = Get(albumId, user);
+            var album = Get(albumId);
             if (album == null)
             {
                 return false;

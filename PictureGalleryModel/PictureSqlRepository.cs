@@ -16,9 +16,14 @@ namespace PictureGalleryModel
             _context = context;
         }
 
+        public List<Picture> GetAllSelectedForHeadline()
+        {
+            return _context.Pictures.ToList();
+        }
+
         public void Add(Picture picture)
         {
-            if (Get(picture.Id, picture.Album.CreatedByUser) != null)
+            if (Get(picture.Id) != null)
             {
                 throw new DuplicatePictureException(String.Format("duplicate id: {0}", picture.Id));
             }
@@ -26,20 +31,15 @@ namespace PictureGalleryModel
             _context.SaveChanges();
         }
 
-        public Picture Get(Guid pictureId, User user)
+        public Picture Get(Guid pictureId)
         {
-            var picture = _context.Pictures.Where(s => s.Id == pictureId).FirstOrDefault();
-            if (picture != null && picture.Album.CreatedByUser != user)
-            {
-                throw new PictureAccessDeniedException("picture is not available for this user");
-            }
-            return picture;
+            return _context.Pictures.Where(s => s.Id == pictureId).FirstOrDefault();
         }
 
         public bool Remove(Guid pictureId, User user)
         {
-            var picture = Get(pictureId, user);
-            if (picture == null)
+            var picture = Get(pictureId);
+            if (picture == null || picture.Album.CreatedByUser != user)
             {
                 return false;
             }

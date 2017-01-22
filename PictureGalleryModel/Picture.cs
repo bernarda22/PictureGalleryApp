@@ -13,16 +13,6 @@ namespace PictureGalleryModel
         public virtual List<User> LikedByUsers { get; set; }
         public virtual List<Comment> Comments { get; set; } 
 
-       /* public Picture(string name, Album album, string pathToData)
-        {
-            Id = Guid.NewGuid();
-            Name = name;
-            PathToData = pathToData;
-            DateCreated = DateTime.Now;
-            Album = album;
-            SelectedForHeadline = false;
-        }*/
-
         public Picture()
         {
             Id = Guid.NewGuid();

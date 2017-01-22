@@ -8,7 +8,8 @@ namespace PictureGalleryModel
 {
     public interface IPictureRepository
     {
-        Picture Get(Guid pictureId, User user);
+        List<Picture> GetAllSelectedForHeadline();
+        Picture Get(Guid pictureId);
         void Add(Picture picture);
         bool Remove(Guid pictureId, User user);
         void Update(Picture picture, User user);

@@ -77,18 +77,24 @@ namespace PictureGalleryApp.Controllers
             return View(model);
         }
 
+        public IActionResult Details(string id)
+        {
+            var album = _albumRepository.Get(new Guid(id));
+            return View(album);
+        }
+
         private async Task<User> getCurrentUser()
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
             return _userRepository.Get(currentUser.Email);
         }
 
-        //public iactionresult image(string id)
-        //{
-        //    var dir = microsoft.aspnetcore.server.mappath("/images");
-        //    var path = path.combine(dir, id + ".jpg"); //validate the path for security or use other means to generate the path.
-        //    return base.file(path, "image/jpeg");
-        //}
+        public async Task<IActionResult> Image(string id)
+        {
+            User user = await getCurrentUser();
+            var picture = _pictureRepository.Get(new Guid(id));
+            return PhysicalFile(picture.PathToData, "image/jpeg");
+        }
 
     }
 }
