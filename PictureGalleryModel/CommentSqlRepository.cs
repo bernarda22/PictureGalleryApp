@@ -32,7 +32,7 @@ namespace PictureGalleryModel
 
         public List<Comment> GetAll(Guid pictureId)
         {
-            return _context.Comments.Where(s => s.Commented.Id == pictureId).ToList();
+            return _context.Comments.Where(s => s.Commented.Id == pictureId).OrderByDescending(s => s.DateCreated).ToList();
         }
     }
 }

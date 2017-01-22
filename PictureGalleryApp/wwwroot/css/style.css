@@ -1,6 +1,19 @@
-/**
- * Grid styles
- */
+
+.comments {
+    text-align: left;
+}
+
+textarea {
+    max-width: none; 
+}
+
+.user_name{
+    font-size:14px;
+    font-weight: bold;
+}
+.comments-list .media{
+    border-bottom: 1px dotted #ccc;
+}
 
 /**
  * Button component

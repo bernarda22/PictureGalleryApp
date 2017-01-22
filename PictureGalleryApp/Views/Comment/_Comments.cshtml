@@ -1,0 +1,12 @@
+﻿@model List<Comment>
+
+@foreach (var comment in Model)
+{
+    <div class="media">
+        <div class="media-body">
+            <p class="pull-right"><small>@comment.DateCreated</small></p>
+            <h4 class="media-heading user_name">@comment.CreatedBy.UserName</h4>
+            @comment.Text
+        </div>
+    </div>
+}

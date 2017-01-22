@@ -14,15 +14,6 @@ namespace PictureGalleryModel
         public virtual Picture Commented { get; set; }
         public virtual User CreatedBy { get; set; }
 
-        /*public Comment(string text, Picture commented, User createdby)
-        {
-            Id = Guid.NewGuid();
-            Text = text;
-            Commented = commented;
-            CreatedBy = createdby;
-            DateCreated = DateTime.Now;
-        }*/
-
         public Comment()
         {
             Id = Guid.NewGuid();

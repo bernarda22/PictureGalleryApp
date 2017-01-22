@@ -77,10 +77,13 @@ namespace PictureGalleryApp.Controllers
             return View(model);
         }
 
-        public IActionResult Details(string id)
+        public async Task<IActionResult> Details(string id)
         {
+            var user = await getCurrentUser();
             var album = _albumRepository.Get(new Guid(id));
-            return View(album);
+            var albumViewModel = new AlbumViewModel();
+            albumViewModel.SelectedAlbum = album;
+            return View(albumViewModel);
         }
 
         private async Task<User> getCurrentUser()

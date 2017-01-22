@@ -12,15 +12,15 @@
            var reader = new FileReader();
 
            reader.onload = function (e) {
-                var el = $('<img />')
-                            .attr('src', e.target.result)
-                            .attr('class', 'grid__item grid__sizer')
-                
+               var el = $('<img />')
+                           .attr('src', e.target.result)
+                           .attr('class', 'grid__item grid__sizer');
+
                $imagesGridWaitingForUpload
                     .append(el)
                     .masonry('appended', el)
                     .masonry();
-           }
+           };
 
            reader.readAsDataURL(file);
         }

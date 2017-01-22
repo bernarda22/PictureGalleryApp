@@ -1,23 +1,22 @@
-﻿@model Album
+﻿@model AlbumViewModel
 
-<h2>@Model.Title</h2>
-       <section class="container-fluid gallery bg-faded">
-            <div class="grid">
-                <div class="gutter__sizer"></div>
+<h2>@Model.SelectedAlbum.Title</h2>
+<section class="container-fluid gallery bg-faded">
 
-                @foreach (var picture in Model.Pictures)
-                {
-                    <a href="#" class="grid__item grid__sizer">
-                        <div class="item__overlay">
-                            <button class="js-button btn details-btn btn-secondary-outline center-block" data-toggle="modal" data-target="#modalPicture" type="button" value="Expand photo" role="button">Expand photo</button>
-                        </div>
-                        <img src='@string.Format("../Image/{0}", picture.Id)' />
-                    </a>
-                }
-            </div>
-        </section>     
+    <div class="grid">
+        <div class="gutter__sizer"></div>
 
-
+        @foreach (var picture in Model.SelectedAlbum.Pictures)
+        {
+            <a href="#" class="grid__item grid__sizer">
+                <div class="item__overlay">
+                    <button class="js-button btn details-btn btn-secondary-outline center-block" data-toggle="modal" data-target="#modalPicture" type="button" value="Expand photo" role="button">Expand photo</button>
+                </div>
+                <img src='@string.Format("../Image/{0}", picture.Id)' picture-id="@picture.Id"/>
+            </a>
+        }
+    </div>
+</section>
 
 <!-- Modal -->
 <div id="modalPicture" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalPictureLabel" aria-hidden="true">
@@ -32,7 +31,7 @@
             </div><!-- .end Modal - header -->
             <!-- Modal - body -->
             <div class="modal-body">
-                <img class="js-modal-image" src="" alt="Credits to Unsplash.com" />
+                <img class="js-modal-image" src="" alt="" />
             </div><!-- .end Modal - body -->
             <!-- Modal - footer -->
             <div class="modal-footer">
@@ -48,10 +47,39 @@
                     <span class="fa fa-comment" aria-hidden="true"></span>
                     <span class="sr-only">Comment</span>
                 </a>
-                <a href="https://twitter.com/home?status=Check%20out%20this%20Mansory%20Gallery%20tutorial%20on%20http%3A//blog.alexdevero.com/%20%23design%20%23webdesign" target="_blank" aria-label="Share">
-                    <span class="fa fa-twitter" aria-hidden="true"></span>
-                    <span class="sr-only">Tweet it</span>
-                </a>
+
+                <div class="container col-md-12">
+                    <div class="row comments">
+                        <div class="page-header">
+                            <h1>Comments</h1>
+                        </div>
+                        <div class="comments-list">
+                            
+                            
+                            
+                            <div class="media">
+                                <div class="media-body">
+                                    <p class="pull-right"><small>5 days ago</small></p>
+                                    <h4 class="media-heading user_name">Baltej Singh</h4>
+                                    Wow! this is really great mego[ege gegoege] eomgeorgmerg egomerogmerg erg ergermogemrogemrger gergpjero[gjerogjeroge].
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <form asp-controller="Comment" asp-action="Create" method="post" class="form-vertical" enctype="application/x-www-form-urlencoded">
+                                <div class="form-group">
+                                    <input asp-for="@Model.SelectedAlbum.Id" class="form-control" style="visibility:hidden;" />
+                                    <input asp-for="@Model.CreatedComment.PictureId" class="form-control" id="selected-picture-id" style="visibility:hidden;"/>
+                                    <textarea asp-for="@Model.CreatedComment.Text" class="form-control" rows="5" placeholder="Comment" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit">Comment</button>
+                                </div>
+                         </form>
+                    </div>
+                </div>
             </div><!-- .end Modal - footer -->
         </div>
     </div>
