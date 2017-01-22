@@ -61,9 +61,10 @@ namespace PictureGalleryApp
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+
             services.AddMvc(options =>
             {
-                options.SslPort = 44354;
+                options.SslPort = 443;
                 options.Filters.Add(new RequireHttpsAttribute());
             });
 

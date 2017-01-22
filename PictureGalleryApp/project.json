@@ -80,7 +80,10 @@
       "wwwroot",
       "**/*.cshtml",
       "appsettings.json",
+      "appsettings.production.json",
+      "appsettings.development.json",
       "web.config"
+      
     ]
   },
 
